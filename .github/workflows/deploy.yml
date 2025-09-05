@@ -26,13 +26,13 @@ jobs:
           jupyter lite build --contents content --output-dir dist
       - name: Build static tutorial pages
         run: |
-          mkdir -p dist/tutorials
+          mkdir -p dist/pages
           for f in content/*.ipynb; do 
             jupyter nbconvert \
               --TagRemovePreprocessor.enabled=True \
               --TagRemovePreprocessor.remove_cell_tags='{"html-hide"}' \
               --to html "$f" \
-              --output-dir dist/tutorials
+              --output-dir dist/pages
           done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
