@@ -24,14 +24,15 @@ jobs:
           python -m pip install nbconvert jupyter
       - name: Build static tutorial pages
         run: |
-          mkdir -p dist/pages
+          mkdir -p dist
           for f in notebooks/*.ipynb; do 
             jupyter nbconvert \
               --TagRemovePreprocessor.enabled=True \
               --TagRemovePreprocessor.remove_cell_tags='{"html-hide"}' \
               --to html "$f" \
-              --output-dir dist/pages
+              --output-dir dist
           done
+          mv dist/00-intro.html dist/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
