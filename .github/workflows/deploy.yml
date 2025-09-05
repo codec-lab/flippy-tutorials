@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - binder
   pull_request:
     branches:
       - '*'
@@ -20,14 +21,11 @@ jobs:
           python-version: '3.11'
       - name: Install the dependencies
         run: |
-          python -m pip install -r requirements.txt
-      - name: Build the JupyterLite site
-        run: |
-          jupyter lite build --contents content --output-dir dist
+          python -m pip install nbconvert jupyter
       - name: Build static tutorial pages
         run: |
           mkdir -p dist/pages
-          for f in content/*.ipynb; do 
+          for f in notebooks/*.ipynb; do 
             jupyter nbconvert \
               --TagRemovePreprocessor.enabled=True \
               --TagRemovePreprocessor.remove_cell_tags='{"html-hide"}' \
