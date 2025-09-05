@@ -23,8 +23,12 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Build static tutorial pages
         run: |
-          for f in content/*.ipynb; do \
-            jupyter nbconvert --TagRemovePreprocessor.remove_cell_tags='{"html-hide"}' --to html $$f; \
+          mkdir -p tutorials
+          for f in content/*.ipynb; do 
+            jupyter nbconvert \
+              --TagRemovePreprocessor.enabled=True \
+              --TagRemovePreprocessor.remove_cell_tags='{"html-hide"}' \
+              --to html "$f"
           done
           mv content/*.html tutorials/
       - name: Build the JupyterLite site
