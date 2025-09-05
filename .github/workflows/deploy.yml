@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - binder
   pull_request:
     branches:
       - '*'
@@ -41,7 +40,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/binder'
+    if: github.ref == 'refs/heads/main'
     permissions:
       pages: write
       id-token: write
