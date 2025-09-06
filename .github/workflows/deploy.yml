@@ -32,7 +32,7 @@ jobs:
               --output-dir dist
           done
           mv dist/00-intro.html dist/index.html
-          cp favicon.png dist/favicon.png
+          cp favicon.ico dist/favicon.ico
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
